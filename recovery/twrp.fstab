@@ -1,0 +1,8 @@
+/system		ext4		/dev/block/bootdevice/by-name/system
+/cache		ext4		/dev/block/bootdevice/by-name/cache
+/data		ext4		emmc	/dev/block/bootdevice/by-name/userdata
+/misc		emmc	/dev/block/bootdevice/by-name/misc
+/boot		emmc	/dev/block/bootdevice/by-name/boot
+/recovery		emmc	/dev/block/bootdevice/by-name/recovery
+/storage/sdcard0		vfat	/devices/soc.0/7824900.sdhci/mmc_host/mmc0		flags=display="Int SD";storage;wipeingui;removable
+/storage/sdcard1		vfat	/devices/soc.0/7864900.sdhci/mmc_host/mmc1		flags=display="Ext SD";storage;wipeingui;removable

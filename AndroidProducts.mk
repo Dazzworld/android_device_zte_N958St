@@ -1,2 +1,2 @@
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/device_N958St.mk
+    $(LOCAL_DIR)/full_N958St.mk

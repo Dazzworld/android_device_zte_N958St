@@ -1,0 +1,2 @@
+on init
+    write /sys/class/leds/lcd-backlight/brightness 100
