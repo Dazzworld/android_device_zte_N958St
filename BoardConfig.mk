@@ -1,4 +1,4 @@
-USE_CAMERA_STUB := false
+#USE_CAMERA_STUB := false
 LOCAL_PATH := device/zte/N958St
 
 # inherit from the proprietary version
@@ -50,7 +50,8 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 # Camera
 USE_DEVICE_SPECIFIC_CAMERA := true
 BOARD_USES_LEGACY_MMAP := true
-TARGET_USE_VENDOR_CAMERA_EXT := true
+#TARGET_USE_VENDOR_CAMERA_EXT := true
+BOARD_QTI_CAMERA_32BIT_ONLY := true
 
 # charger
 BOARD_CHARGER_ENABLE_SUSPEND := true
@@ -92,22 +93,23 @@ TARGET_PROVIDES_LIBLIGHT := true
 
 # Kernel
 TARGET_NO_KERNEL := false
-BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci androidboot.selinux=permissive
+#BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE := console=null androidboot.console=ttyHSL0 boot_cpus=0,3,4,7 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 sched_enable_hmp=1 androidboot.selinux=permissive
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_KERNEL_BASE        := 0x80000000
 BOARD_KERNEL_PAGESIZE    := 2048
 BOARD_KERNEL_TAGS_OFFSET := 0x01e00000
 BOARD_RAMDISK_OFFSET     := 0x02000000
-TARGET_KERNEL_SOURCE := kernel/zte/hn8916
-TARGET_KERNEL_CONFIG := msm8916-N958X_defconfig
+TARGET_KERNEL_SOURCE := kernel/zte/msm8916
+TARGET_KERNEL_CONFIG := msm8916-N958St_defconfig
 BOARD_CUSTOM_BOOTIMG_MK := $(LOCAL_PATH)/mkbootimg.mk
 
-WLAN_MODULES:
-	mkdir -p $(KERNEL_MODULES_OUT)/pronto
-	mv $(KERNEL_MODULES_OUT)/wlan.ko $(KERNEL_MODULES_OUT)/pronto/pronto_wlan.ko
-	ln -sf /system/lib/modules/pronto/pronto_wlan.ko $(TARGET_OUT)/lib/modules/wlan.ko
+#WLAN_MODULES:
+#	mkdir -p $(KERNEL_MODULES_OUT)/pronto
+#	mv $(KERNEL_MODULES_OUT)/wlan.ko $(KERNEL_MODULES_OUT)/pronto/pronto_wlan.ko
+#	ln -sf /system/lib/modules/pronto/pronto_wlan.ko $(TARGET_OUT)/lib/modules/wlan.ko
 
-TARGET_KERNEL_MODULES += WLAN_MODULES
+#TARGET_KERNEL_MODULES += WLAN_MODULES
 TARGET_HAVE_OMX_HEVC := true
 
 # Partitions
@@ -131,8 +133,8 @@ TARGET_POWERHAL_VARIANT := qcom
 
 # Qualcomm Hardware
 BOARD_USES_QCOM_HARDWARE := true
-TARGET_USES_QCOM_BSP := true
-COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE -DQCOM_BSP -DQCOM_MEDIA_DISABLE_BUFFER_SIZE_CHECK
+#TARGET_USES_QCOM_BSP := true
+#COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE -DQCOM_BSP -DQCOM_MEDIA_DISABLE_BUFFER_SIZE_CHECK
 
 # Vendor Init
 TARGET_UNIFIED_DEVICE := true

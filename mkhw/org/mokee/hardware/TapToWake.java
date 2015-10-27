@@ -27,7 +27,7 @@ import java.io.File;
  */
 public class TapToWake {
 
-    private static final String WAKEUP_GESTURE_FILE = "/sys/devices/soc.0/78b9000.i2c/i2c-5/5-0024/main_ttsp_core.cyttsp4_i2c_adapter/easy_wakeup_gesture";
+    private static final String CONTROL_PATH = "/sys/devices/virtual/touchscreen/touchscreen_dev/gesture_ctrl";
 
     /**
      * Whether device supports it
@@ -35,7 +35,7 @@ public class TapToWake {
      * @return boolean Supported devices must return always true
      */
     public static boolean isSupported() {
-	    File file = new File(WAKEUP_GESTURE_FILE);
+	    File file = new File(CONTROL_PATH);
 	    return file.exists();
     }
 
@@ -46,7 +46,11 @@ public class TapToWake {
      * disabled.
      */
     public static boolean isEnabled() {
-	    return !FileUtils.readOneLine(WAKEUP_GESTURE_FILE).equals("0x00");
+        boolean enabled = false;
+        String state = FileUtils.readOneLine(CONTROL_PATH);
+        if (state != null)
+            enabled = (Long.decode(state) & 0x200) == 0x200;
+        return enabled;
     }
 
     /**
@@ -57,7 +61,7 @@ public class TapToWake {
      */
     
     public static boolean setEnabled(boolean state) {
-	    return FileUtils.writeLine(WAKEUP_GESTURE_FILE, String.valueOf(state?1:0));
+	    return FileUtils.writeLine(CONTROL_PATH, (state ? "double_click=true" : "double_click=false"));
     }
 
 }
